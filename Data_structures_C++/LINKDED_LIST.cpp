@@ -29,6 +29,11 @@ public:
         this->item = item;
         this->next = nullptr;
     }
+    SingleNode()
+    {
+        this->item = nullptr_t;
+        this->next = nullptr;
+    }
 };
 
 /**
@@ -62,7 +67,7 @@ public:
     LINKDED_LIST()
     {
         // 创建哨兵节点，后续的实际元素都链接在它的 next 后面。
-        this->head = new SingleNode<T>(T());
+        this->head = new SingleNode<T>();
     }
 
     /**
@@ -307,9 +312,9 @@ public:
     {
         // 跳过不存储业务数据的头结点，依次检查所有有效节点。
         SingleNode<T> *current = this->head->next;
-        while (current!=nullptr)
+        while (current != nullptr)
         {
-            if(current->item==item)
+            if (current->item == item)
             {
                 return true;
             }
