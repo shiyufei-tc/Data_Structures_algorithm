@@ -1,4 +1,5 @@
 #include<deque>
+#include<iostream>
 
 template <typename T>
 class BinaryTreeNode
@@ -50,6 +51,7 @@ public:
             return;
         }
         std::deque<T> pending;
+        pending.push_back(this->root);
         while (!pending.empty())
         {
             BinaryTreeNode<T> *Node = pending.pop_front();
@@ -65,6 +67,31 @@ public:
                 return;
             }
             pending.push_back(Node->right);
+        }
+    }
+
+    void breadth_first()
+    {
+        if (this->root==nullptr)
+        {
+            return;
+        }
+
+        std::deque<T> pending;
+        pending.push_back(this->root);
+
+        while (!pending.empty())
+        {
+            BinaryTreeNode<T> *Node = pending.pop_front();
+            std::cout << Node->item << " ";
+            if (Node->left!=nullptr)
+            {
+                pending.push_back(Node->left);
+            }
+            if(Node->right!=nullptr)
+            {
+                pending.push_back(Node->right);
+            }
         }
     }
 };
