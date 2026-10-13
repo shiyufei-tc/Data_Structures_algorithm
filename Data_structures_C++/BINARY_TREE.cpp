@@ -54,7 +54,7 @@ public:
         pending.push_back(this->root);
         while (!pending.empty())
         {
-            BinaryTreeNode<T> *Node = pending.pop_front();
+            BinaryTreeNode<T> *Node = pending.front();
             if (Node->left == nullptr)
             {
                 Node->left = new_node;
@@ -67,6 +67,7 @@ public:
                 return;
             }
             pending.push_back(Node->right);
+            pending.pop_front();
         }
     }
 
@@ -82,7 +83,7 @@ public:
 
         while (!pending.empty())
         {
-            BinaryTreeNode<T> *Node = pending.pop_front();
+            BinaryTreeNode<T> *Node = pending.front();
             std::cout << Node->item << " ";
             if (Node->left != nullptr)
             {
@@ -92,6 +93,7 @@ public:
             {
                 pending.push_back(Node->right);
             }
+            pending.pop_front();
         }
     }
 
