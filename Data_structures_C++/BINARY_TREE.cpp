@@ -20,13 +20,14 @@ template <typename T>
 class BINARYTREE
 {
 private:
-    BinaryTreeNode<T> clear(BinaryTreeNode<T> *Node)
+    BinaryTreeNode<T> *clear(BinaryTreeNode<T> *Node)
     {
         if (Node == nullptr)
-            return;
+            return nullptr;
         clear(Node->left);
         clear(Node->right);
         delete Node;
+        return nullptr;
     }
 
 public:
@@ -50,7 +51,7 @@ public:
             this->root = new_node;
             return;
         }
-        std::deque<T> pending;
+        std::deque<BinaryTreeNode<T>*> pending;
         pending.push_back(this->root);
         while (!pending.empty())
         {
@@ -78,7 +79,7 @@ public:
             return;
         }
 
-        std::deque<T> pending;
+        std::deque<BinaryTreeNode<T>*> pending;
         pending.push_back(this->root);
 
         while (!pending.empty())
@@ -97,30 +98,33 @@ public:
         }
     }
 
-    BinaryTreeNode<T> preorder(BinaryTreeNode<T> *Node = this->root)
+    BinaryTreeNode<T> *preorder(BinaryTreeNode<T> *Node = this->root)
     {
         if (this->root == nullptr)
-            return;
+            return nullptr;
         std::cout << Node->item << " ";
         preorder(Node->left);
         preorder(Node->right);
+        return nullptr;
     }
 
-    BinaryTreeNode<T> inorder(BinaryTreeNode<T> *Node = this->root)
+    BinaryTreeNode<T> *inorder(BinaryTreeNode<T> *Node = this->root)
     {
         if (this->root == nullptr)
-            return;
+            return nullptr;
         inorder(Node->left);
         std::cout << Node->item << " ";
         inorder(Node->right);
+        return nullptr;
     }
 
-    BinaryTreeNode<T> postorder(BinaryTreeNode<T> *Node = this->root)
+    BinaryTreeNode<T> *postorder(BinaryTreeNode<T> *Node = this->root)
     {
         if (this->root == nullptr)
-            return;
+            return nullptr;
         postorder(Node->left);
         postorder(Node->right);
         std::cout << Node->item << " ";
+        return nullptr;
     }
 };
