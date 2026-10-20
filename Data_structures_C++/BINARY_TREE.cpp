@@ -20,14 +20,13 @@ template <typename T>
 class BINARYTREE
 {
 private:
-    BinaryTreeNode<T> *clear(BinaryTreeNode<T> *Node)
+    void clear(BinaryTreeNode<T> *Node)
     {
         if (Node == nullptr)
-            return nullptr;
+            return;
         clear(Node->left);
         clear(Node->right);
         delete Node;
-        return nullptr;
     }
 
 public:
@@ -98,33 +97,30 @@ public:
         }
     }
 
-    BinaryTreeNode<T> *preorder(BinaryTreeNode<T> *Node = this->root)
+    void preorder(BinaryTreeNode<T> *Node = this->root)
     {
         if (this->root == nullptr)
-            return nullptr;
+            return;
         std::cout << Node->item << " ";
         preorder(Node->left);
         preorder(Node->right);
-        return nullptr;
     }
 
-    BinaryTreeNode<T> *inorder(BinaryTreeNode<T> *Node = this->root)
+    void inorder(BinaryTreeNode<T> *Node = this->root)
     {
         if (this->root == nullptr)
-            return nullptr;
+            return;
         inorder(Node->left);
         std::cout << Node->item << " ";
         inorder(Node->right);
-        return nullptr;
     }
 
-    BinaryTreeNode<T> *postorder(BinaryTreeNode<T> *Node = this->root)
+    void postorder(BinaryTreeNode<T> *Node = this->root)
     {
         if (this->root == nullptr)
-            return nullptr;
+            return;
         postorder(Node->left);
         postorder(Node->right);
         std::cout << Node->item << " ";
-        return nullptr;
     }
 };
