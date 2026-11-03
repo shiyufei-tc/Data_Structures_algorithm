@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <queue>
+#include <span>
 
 struct EdgeNode
 {
@@ -17,7 +18,8 @@ public:
     std::vector<std::vector<EdgeNode>> adj_list;
     std::vector<bool> is_visited;
 
-    GraphAdj_List(const std::vector<std::vector<EdgeNode>> &adj_list) : adj_list(adj_list) {
+    GraphAdj_List(const std::vector<std::vector<EdgeNode>> &adj_list) : adj_list(adj_list)
+    {
         this->is_visited.assign(adj_list.size(), false);
     }
     GraphAdj_List(const std::vector<std::vector<int>> &matrix, const std::vector<int> &vertices)
@@ -69,14 +71,21 @@ public:
                                 this->adj_list[v].end());
     }
 
+    void Travel_Display(std::span<const EdgeNode> EdgeNodes)
+    {
+        for (const auto &EdgeNode : EdgeNodes)
+        {
+            std::cout << "Visited edge: " << EdgeNode.to << "Distance: " << EdgeNode.weight << std::endl;
+        }
+    }
+
     void DFS(int Vertex)
     {
         this->is_visited[Vertex] = true;
-        for (auto &EdgeNode:this->adj_list[Vertex])
-            std::cout << "Visited edge: " << EdgeNode.to<<"Distance: " << EdgeNode.weight << std::endl;
+        this->Travel_Display(this->adj_list[Vertex]);
         for (auto &EdgeNode : this->adj_list[Vertex])
         {
-            if(!is_visited[EdgeNode.to])
+            if (!is_visited[EdgeNode.to])
             {
                 DFS(EdgeNode.to);
             }
@@ -93,12 +102,12 @@ public:
             int Vertex = pending.front();
             pending.pop();
             this->is_visited[Vertex] = true;
-            for(auto &EdgeNode:this->adj_list[Vertex])
-                std::cout << "Visited edge: " << EdgeNode.to<<"Distance: " << EdgeNode.weight << std::endl;
             
-            for(auto &EdgeNode :this->adj_list[Vertex])
+            this->Travel_Display(this->adj_list[Vertex]);
+
+            for (auto &EdgeNode : this->adj_list[Vertex])
             {
-                if(!is_visited[EdgeNode.to])
+                if (!is_visited[EdgeNode.to])
                 {
                     pending.push(EdgeNode.to);
                 }
