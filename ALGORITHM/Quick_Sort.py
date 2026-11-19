@@ -1,6 +1,3 @@
-
-
-
 def Quick_Sort(my_list,start=0,end=None):
     """对列表按快速排序思想进行原地升序排序。
 
